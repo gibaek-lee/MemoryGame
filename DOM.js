@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
-    _.delay(api.startEvent, 2000);
- 
+  // _.delay(api.startEvent, 2000);
+  api.startEvent();
+  
   $('body').data("levelSetting",
                     {"level1" : ['A','A','B','B'],
                      "level2" : [1,1,2,2,3,3],
@@ -17,5 +18,5 @@ $(document).ready(function(){
  
   $('.Resetbutton').on('click', api.reset); // 클릭시 reset 시키는 역활  
 
-  $()
+  
 });

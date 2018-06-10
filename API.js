@@ -3,11 +3,11 @@
   api.standard = '';
 
   api.startEvent = function(){
-    $('.textBox').css('color','white'); // 시작시 외우라고 보여주기 위해서 만든 함수
+    $('.textBox').animate({opacity : 0}, 1500); // 시작시 외우라고 보여주기 위해서 만든 함수
   }
   
   api.clickDefalutEvent = function(){
-    $(this).css('color' ,'black'); // 기본적으로 클릭하면 none <-> block
+    $(this).css('opacity' ,1); // 기본적으로 클릭하면 none <-> block
     if(api.standard.length === 0 ) {   // 첫번째 클릭인경우(standard가 없는경우) : standard에 값을 지정
       api.standard = $(this).text();    // 두번째 클릭에서의 조건을 돌아가게 해준다.
       console.log(api.standard);
@@ -18,7 +18,7 @@
         console.log(api.standard);
       }
       else{
-        $('.textBox').css('color', 'white'); // 두 text값이 다른경우 다시 가려주기 위해 
+        $('.textBox').animate({'opacity': 0},1000); // 두 text값이 다른경우 다시 가려주기 위해 
         api.standard = '';
         console.log(api.standard);
       }
@@ -53,11 +53,10 @@
 
   api.reset = function(){
     $('.textBox').empty(); // textBox의 내용물(text값)을 비우는 api
-    $('.textBox').css('color', 'white'); // 기존에 가려주는 역활을 했던 color : white를 다시 넣어줘서 가려준다. 
     // api.pushTotextBox(); // 새롭게 넣어주기 위해 위에 있던 함수를 재실행
     api.pushBoxWithDataSet();
-    $('.textBox').css('color','black'); // 다시 보여줘야하니까 
-    _.delay(api.startEvent, 2000); // 다시 가리기
+    $('.textBox').css('opacity','1'); // 게임 중간에 reset을 누르는 경우 다시 보여주기 위해서!!
+    api.startEvent() // 다시 가리기
   }
 
   api.levelup = function(){
