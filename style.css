@@ -1,0 +1,25 @@
+/*혜정님*/
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%; 
+ }
+ .childNode{
+  border: solid 2px black;
+  flex : 1 45%;
+  height: 100px;
+ }
+ .textBox{
+   cursor: pointer;
+   /* color : white; 기백님 아이디어 +++ 동일 크기 + background색을 가진 박스를 하나 더 만들어 z-index를 컨트롤 */
+   font-size: -webkit-xxx-large;
+   text-align: center;
+   height: 77px;
+   padding-top: 22px;
+ }
+ button{
+   cursor: pointer;
+ }
+
+ 
