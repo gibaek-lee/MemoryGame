@@ -14,7 +14,6 @@ $(document).ready(function(){
   
   api.startEvent();  
   api.pushBoxWithDataSet(); // 최초에 실행되야 하는 함수들 
-  console.log($('body').data("levelSetting").level1[1]);
 
   $('div').on('click','.textBox',_.debounce(api.clickDefalutEvent,200)); // 급하게 빨리 누를 시 버그가 생기는것을 방지 
   // 아직 생성되지 않은 요소들에도 이벤트를 바인딩해주는 방식 : on함수 parameter 중간에 지정할 요소를 적는다.               

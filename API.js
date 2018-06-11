@@ -9,7 +9,7 @@
   api.clickDefalutEvent = function(){
     $(this).css('opacity' ,1); // 기본적으로 클릭하면 내용물을 보여준다. 
     if(api.standard.length === 0 ) {   // 첫번째 클릭인경우(standard가 없는경우) : standard에 값을 지정
-      api.standard = $(this).text();    // 두번째 클릭에서의 조건을 돌아가게 해준다.
+      api.standard = $(this).text();   // 두번째 클릭에서의 조건을 돌아가게 해준다.
     }
     else{
       if(api.standard === $(this).text()){ // 두번째 클릭에 맞는경우 display에 대한 변화 X
@@ -40,14 +40,19 @@
   // } 
 
   api.pushBoxWithDataSet = function(){
-    var level1Flag = $('body').data("levelSetting").level1;
-    var level2Flag = $('body').data("levelSetting").level2;
+    var textBoxLength = $('.textBox').length;
+    var level1Flag = $('body').data("levelSetting").level1,
+        level2Flag = $('body').data("levelSetting").level2,
+        level3Flag = $('body').data("levelSetting").level3;
 
-    if(!level1Flag[1]) {
+    if(textBoxLength === 4) {
       var dataArr = level1Flag[0];
     }
-    else if(level1Flag[1] && !level2Flag[1]){
+    else if(textBoxLength === 6){
       var dataArr = level2Flag[0];
+    } 
+    else if(textBoxLength === 8){
+      var dataArr = level3Flag[0];
     } 
 
     console.log(dataArr);
@@ -73,28 +78,39 @@
         $childNode2 = $('<div class="childNode"><div id ="5" class="textBox"></div></div>'),
         $childNode3 = $('<div class="childNode"><div id ="6" class="textBox"></div></div>'),
         $childNode4 = $('<div class="childNode"><div id ="7" class="textBox"></div></div>'),
-        level1Flag = $('body').data("levelSetting").level1[1],
-        level2Flag = $('body').data("levelSetting").level2[1];
+        textBoxLength = $('.textBox').length;
     
-    if(!level1Flag){
+    if(textBoxLength === 4){
       $('.container').append($childNode1);
       $('.container').append($childNode2);
     }
-    else if(level1Flag && !level2Flag){
+    else if(textBoxLength === 6){
       $('.container').append($childNode3);
       $('.container').append($childNode4);
     }
-  } // 우선 level2까지의 경우만 만들기. 
+  }  
 
+  // api.vaildationLevel = function(){
+  //   var level1Flag = $('body').data("levelSetting").level1[1],
+  //       level2Flag = $('body').data("levelSetting").level2[1],
+  //       level3Flag = $('body').data("levelSetting").level3[1];
 
-  api.vaildationLevel = function(){
-    var levelFlag = $('body').data("levelSetting").level1;
-    levelFlag[1] = true;
-  }
+  //   if(!level1Flag){
+  //     level1Flag = true;
+  //   }
+  //   else if(level1Flag && !level2Flag){
+  //     level2Flag = true;
+  //   }
+  //   else if(level2Flag && !level3Flag){
+  //     level3Flag = true;
+  //   }
+  //   console.log(level1Flag,level2Flag,level3Flag);
+  // } 
+  // flag를 이용한 방법으로 컨트롤이 안됌... 
 
   api.levelUp = function(){
     api.templetFactory();
-    api.vaildationLevel();
+    // api.vaildationLevel();
     api.reset();
   }
       
