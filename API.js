@@ -39,24 +39,19 @@
   //   } // textBox에 넣어주는 역활을 해준다. (정민님)
   // } 
 
-  api.vaildationLevel = function(){
-    $('.Levelup')
-  }
-
-
   api.pushBoxWithDataSet = function(){
     var level1Flag = $('body').data("levelSetting").level1;
     var level2Flag = $('body').data("levelSetting").level2;
 
     if(!level1Flag[1]) {
-      level1Flag[1] = true;
       var dataArr = level1Flag[0];
     }
-    else if(level1Flag && !level2Flag){
-      level2Flag[1] = true;
+    else if(level1Flag[1] && !level2Flag[1]){
       var dataArr = level2Flag[0];
     } 
 
+    console.log(dataArr);
+    
     var shuffledArr = _.shuffle(dataArr); // 배열 섞어주기
 
     for (i=0; i<$('.textBox').length; i++) {
@@ -74,23 +69,33 @@
   }
 
   api.templetFactory = function(){
-    var $childNode1 = $('<div class="childNode"><div id ="4" class="textBox"></div></div>');
-    var $childNode2 = $('<div class="childNode"><div id ="5" class="textBox"></div></div>');
-
-    $('.container').append($childNode1);
-    $('.container').append($childNode2);
+    var $childNode1 = $('<div class="childNode"><div id ="4" class="textBox"></div></div>'),
+        $childNode2 = $('<div class="childNode"><div id ="5" class="textBox"></div></div>'),
+        $childNode3 = $('<div class="childNode"><div id ="6" class="textBox"></div></div>'),
+        $childNode4 = $('<div class="childNode"><div id ="7" class="textBox"></div></div>'),
+        level1Flag = $('body').data("levelSetting").level1[1],
+        level2Flag = $('body').data("levelSetting").level2[1];
     
-  } // 우선 level2로 넘어가는 경우만 만들기. 
+    if(!level1Flag){
+      $('.container').append($childNode1);
+      $('.container').append($childNode2);
+    }
+    else if(level1Flag && !level2Flag){
+      $('.container').append($childNode3);
+      $('.container').append($childNode4);
+    }
+  } // 우선 level2까지의 경우만 만들기. 
+
+
+  api.vaildationLevel = function(){
+    var levelFlag = $('body').data("levelSetting").level1;
+    levelFlag[1] = true;
+  }
 
   api.levelUp = function(){
-    var level1Flag = $('body').data("levelSetting").level1;
-    var level2Flag = $('body').data("levelSetting").level2;
-    
-    if(level1Flag[1]){
-      api.templetFactory();
-      api.reset();
-    }
-
+    api.templetFactory();
+    api.vaildationLevel();
+    api.reset();
   }
       
 })();
